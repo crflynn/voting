@@ -167,7 +167,7 @@ def vinton(votes, seats):
 def webster(votes, seats):
     """Apportion seats using the Webster method.
 
-    Identical to the Sainte-Lague method.
+    Known also as the Sainte-Lague method.
 
     :param list votes: a list of vote counts
     :param int seats: the number of seats to apportion
