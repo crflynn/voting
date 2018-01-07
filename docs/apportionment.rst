@@ -10,6 +10,7 @@ according to lists of votes.
 * :py:func:`voting.apportionment.hamilton`
 * :py:func:`voting.apportionment.huntington_hill`
 * :py:func:`voting.apportionment.jefferson`
+* :py:func:`voting.apportionment.sainte_lague`
 * :py:func:`voting.apportionment.vinton`
 * :py:func:`voting.apportionment.webster`
 

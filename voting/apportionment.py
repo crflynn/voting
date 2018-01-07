@@ -83,6 +83,17 @@ def jefferson(votes, seats):
     return ints
 
 
+def sainte_lague(votes, seats):
+    """Apportion seats using the Sainte-Lague method.
+
+    Identical to the Webster method.
+
+    :param list votes: a list of vote counts
+    :param int seats: the number of seats to apportion
+    """
+    pass
+
+
 def vinton(votes, seats):
     """Apportion seats using the Vinton method.
 
@@ -96,6 +107,8 @@ def vinton(votes, seats):
 
 def webster(votes, seats):
     """Apportion seats using the Webster method.
+
+    Identical to the Sainte-Lague method.
 
     :param list votes: a list of vote counts
     :param int seats: the number of seats to apportion
