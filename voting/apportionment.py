@@ -1,6 +1,8 @@
 """Apportionment methods."""
 from math import ceil
+from math import floor
 from math import modf
+from math import sqrt
 from operator import itemgetter
 
 
@@ -10,7 +12,19 @@ def adams(votes, seats):
     :param list votes: a list of vote counts
     :param int seats: the number of seats to apportion
     """
-    pass
+    divisor = 1.0 * sum(votes) / seats
+    decs, lower = zip(*[modf(1.0 * v / divisor) for v in votes])
+    upper = [ceil(1.0 * v / divisor) for v in votes]
+    surplus = int(sum(upper) - seats)
+    if surplus > 0:
+        # divisor diffs that would remove another seat to each group
+        diffs = [1.0 * vote / floor(i + dec)
+                 for i, dec, vote in zip(lower, decs, votes)]
+        # argsort low to high
+        divs = [i[0] for i in sorted(enumerate(diffs), key=itemgetter(1))]
+        for k in range(surplus):
+            upper[divs[k]] -= 1
+    return upper
 
 
 def dhondt(votes, seats):
@@ -44,14 +58,16 @@ def hamilton(votes, seats):
     :param int seats: the number of seats to apportion
     """
     divisor = 1.0 * sum(votes) / seats
-    decs, ints = zip(*[modf(1.0 * v / divisor) for v in votes])
-    ints = list(ints)
-    unallocated = int(seats - sum(ints))
-    leftovers = \
-        [i[0] for i in sorted(enumerate(decs), key=itemgetter(1))][::-1]
-    for k in range(unallocated):
-        ints[leftovers[k]] += 1
-    return ints
+    decs, lower = zip(*[modf(1.0 * v / divisor) for v in votes])
+    lower = [int(l) for l in lower]
+    unallocated = int(seats - sum(lower))
+    if unallocated > 0:
+        # argsort high to low
+        leftovers = \
+            [i[0] for i in sorted(enumerate(decs), key=itemgetter(1))][::-1]
+        for k in range(unallocated):
+            lower[leftovers[k]] += 1
+    return lower
 
 
 def huntington_hill(votes, seats):
@@ -60,7 +76,46 @@ def huntington_hill(votes, seats):
     :param list votes: a list of vote counts
     :param int seats: the number of seats to apportion
     """
-    pass
+    if seats < len(votes):
+        raise ValueError("Must be at least one seat per group.")
+    elif seats == len(votes):
+        return [1] * len(votes)
+    divisor = 1.0 * sum(votes) / seats
+    decs, lower = zip(*[modf(1.0 * v / divisor) for v in votes])
+    quotients = [d + l for d, l in zip(decs, lower)]
+    geo_means = [sqrt(ceil(q) * floor(q)) for q in quotients]
+    assigned = [ceil(q) if q >= g else floor(q)
+                for q, g in zip(quotients, geo_means)]
+    unallocated = int(seats - sum(assigned))
+    if unallocated > 0:
+        # divisors that would add another seat to each group
+        geo_means_next = [sqrt(ceil(q + 1) * floor(q + 1)) for q in quotients]
+        diffs = [1.0 * vote / max(gn, 1)
+                 if q >= g
+                 else 1.0 * vote / max(g, 1)
+                 for vote, q, g, gn
+                 in zip(votes, quotients, geo_means, geo_means_next)]
+        # argsort
+        divs = [i[0] for i in sorted(enumerate(diffs),
+                                     key=itemgetter(1))][::-1]
+        for k in range(unallocated):
+            assigned[divs[k]] += 1
+    elif unallocated < 0:
+        unallocated = abs(unallocated)
+        # divisors that would subtract a seat from each group
+        geo_means_next = [sqrt(ceil(q - 1) * floor(q - 1)) for q in quotients]
+        diffs = [1.0 * vote / max(gn, 1)
+                 if q < g
+                 else 1.0 * vote / max(g, 1)
+                 for vote, q, g, gn
+                 in zip(votes, quotients, geo_means, geo_means_next)]
+        # sort fix to prevent allocations to be zero to any one group
+        diffs = [float('inf') if d < divisor else d for d in diffs]
+        # argsort
+        divs = [i[0] for i in sorted(enumerate(diffs), key=itemgetter(1))]
+        for k in range(unallocated):
+            assigned[divs[k]] -= 1
+    return assigned
 
 
 def jefferson(votes, seats):
@@ -72,15 +127,19 @@ def jefferson(votes, seats):
     :param int seats: the number of seats to apportion
     """
     divisor = 1.0 * sum(votes) / seats
-    decs, ints = zip(*[modf(1.0 * v / divisor) for v in votes])
-    ints = list(ints)
-    unallocated = int(seats - sum(ints))
-    diffs = [1.0 * vote / ceil(i + dec)
-             for i, dec, vote in zip(ints, decs, votes)]
-    divs = [i[0] for i in sorted(enumerate(diffs), key=itemgetter(1))][::-1]
-    for k in range(unallocated):
-        ints[divs[k]] += 1
-    return ints
+    decs, lower = zip(*[modf(1.0 * v / divisor) for v in votes])
+    lower = [int(l) for l in lower]
+    unallocated = int(seats - sum(lower))
+    if unallocated > 0:
+        # divisor diffs that would add another seat to each group
+        diffs = [1.0 * vote / ceil(i + dec)
+                 for i, dec, vote in zip(lower, decs, votes)]
+        # argsort
+        divs = [i[0] for i in sorted(enumerate(diffs),
+                                     key=itemgetter(1))][::-1]
+        for k in range(unallocated):
+            lower[divs[k]] += 1
+    return lower
 
 
 def sainte_lague(votes, seats):
@@ -91,7 +150,7 @@ def sainte_lague(votes, seats):
     :param list votes: a list of vote counts
     :param int seats: the number of seats to apportion
     """
-    pass
+    return webster(votes, seats)
 
 
 def vinton(votes, seats):
@@ -113,4 +172,29 @@ def webster(votes, seats):
     :param list votes: a list of vote counts
     :param int seats: the number of seats to apportion
     """
-    pass
+    divisor = 1.0 * sum(votes) / seats
+    decs, lower = zip(*[modf(1.0 * v / divisor) for v in votes])
+    lower = [int(l) for l in lower]
+    assigned = [round(l + d) for l, d in zip(lower, decs)]
+    unallocated = int(seats - sum(assigned))
+    if unallocated > 0:
+        # divisors that would add another seat to each group
+        diffs = [1.0 * vote / (i + 1.5)
+                 if dec >= 0.5 else 1.0 * vote / (i + 0.5)
+                 for i, dec, vote in zip(lower, decs, votes)]
+        # argsort
+        divs = [i[0] for i in sorted(enumerate(diffs),
+                                     key=itemgetter(1))][::-1]
+        for k in range(unallocated):
+            assigned[divs[k]] += 1
+    elif unallocated < 0:
+        unallocated = abs(unallocated)
+        # divisors that would subtract a seat from each group
+        diffs = [1.0 * vote / (i + 0.5)
+                 if dec >= 0.5 else 1.0 * vote / (i - 0.5)
+                 for i, dec, vote in zip(lower, decs, votes)]
+        # argsort
+        divs = [i[0] for i in sorted(enumerate(diffs), key=itemgetter(1))]
+        for k in range(unallocated):
+            assigned[divs[k]] -= 1
+    return assigned
