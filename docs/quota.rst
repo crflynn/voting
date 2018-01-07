@@ -10,9 +10,6 @@ elect candidates in single transferrable vote elections.
 * :py:func:`voting.quota.imperiali`
 
 .. autofunction:: voting.quota.droop
-
 .. autofunction:: voting.quota.hagenbach_bischoff
-
 .. autofunction:: voting.quota.hare
-
 .. autofunction:: voting.quota.imperiali

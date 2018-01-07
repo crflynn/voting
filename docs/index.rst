@@ -14,7 +14,8 @@ disproportionality, election quotas, and electoral apportionment.
    :caption: Contents:
 
    apportionment
-   measure
+   diversity
+   proportion
    quota
    notes
 

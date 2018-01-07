@@ -1,11 +1,7 @@
 """Measures of disproportionality."""
 from math import sqrt
 
-
-def normalize(values):
-    """Normalize a list of values."""
-    total = sum(values)
-    return [1.0 * value / total for value in values]
+from voting.util import normalize
 
 
 def adjusted_loosemore_hanby(votes, seats, parties='votes'):

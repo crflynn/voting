@@ -1,8 +1,5 @@
-Release History
----------------
+voting
+======
 
-0.1.0 (2018-01-07)
-~~~~~~~~~~~~~~~~~~
-
-* First release.
-* Various quotas, disproportionality measures, and apportionment functions
+A pure Python module for election quotas, voting measures, and apportionment
+methods.
