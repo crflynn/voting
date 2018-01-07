@@ -14,7 +14,7 @@ disproportionality in electoral systems.
 * :py:func:`voting.proportion.rae`
 * :py:func:`voting.proportion.regression`
 * :py:func:`voting.proportion.rose`
-* :py:func:`voting.proportion.saint_lague`
+* :py:func:`voting.proportion.sainte_lague`
 
 .. autofunction:: voting.proportion.adjusted_loosemore_hanby
 .. autofunction:: voting.proportion.dhondt
@@ -26,4 +26,4 @@ disproportionality in electoral systems.
 .. autofunction:: voting.proportion.rae
 .. autofunction:: voting.proportion.regression
 .. autofunction:: voting.proportion.rose
-.. autofunction:: voting.proportion.saint_lague
+.. autofunction:: voting.proportion.sainte_lague

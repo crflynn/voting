@@ -173,8 +173,8 @@ def rose(votes, seats):
     return 100 - loosemore_hanby(votes, seats)
 
 
-def saint_lague(votes, seats):
-    r"""Calculate the Saint-Lague index of disproportionality.
+def sainte_lague(votes, seats):
+    r"""Calculate the Sainte-Lague index of disproportionality.
 
     .. math::
 
