@@ -6,6 +6,25 @@
 Welcome to voting's documentation!
 ==================================
 
+|travis| |rtd| |codecov| |pypi| |pyversions|
+
+
+.. |travis| image:: https://img.shields.io/travis/crflynn/voting.svg
+    :target: https://travis-ci.org/crflynn/voting
+
+.. |rtd| image:: https://img.shields.io/readthedocs/voting.svg
+    :target: http://voting.readthedocs.io/en/latest/
+
+.. |codecov| image:: https://codecov.io/gh/crflynn/voting/branch/master/graphs/badge.svg
+    :target: https://codecov.io/gh/crflynn/voting
+
+.. |pypi| image:: https://img.shields.io/pypi/v/voting.svg
+    :target: https://pypi.python.org/pypi/voting
+
+.. |pyversions| image:: https://img.shields.io/pypi/pyversions/voting.svg
+    :target: https://pypi.python.org/pypi/voting
+
+
 This is a small module that provides simple functions related to measures of
 disproportionality, election quotas, and electoral apportionment.
 
