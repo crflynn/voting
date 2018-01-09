@@ -9,6 +9,17 @@ Welcome to voting's documentation!
 This is a small module that provides simple functions related to measures of
 disproportionality, election quotas, and electoral apportionment.
 
+Installation
+------------
+
+The ``voting`` package is a pure Python module available in Python 2 and 3. It
+can be installed using pip:
+
+.. code-block:: shell
+
+    pip install voting
+
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
