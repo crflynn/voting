@@ -18,7 +18,7 @@ def adams(votes, seats):
     surplus = int(sum(upper) - seats)
     if surplus > 0:
         # divisor diffs that would remove another seat to each group
-        diffs = [1.0 * vote / floor(i + dec)
+        diffs = [1.0 * vote / max(floor(i + dec), 1)
                  for i, dec, vote in zip(lower, decs, votes)]
         # argsort low to high
         divs = [i[0] for i in sorted(enumerate(diffs), key=itemgetter(1))]

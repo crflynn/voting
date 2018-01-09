@@ -1,4 +1,5 @@
 """Measures of diversity."""
+from math import exp
 from math import log
 
 from voting.util import normalize
@@ -17,7 +18,7 @@ def berger_parker(groups):
     return max(groups)
 
 
-def general(groups, q):
+def general(groups, q=1):
     r"""Calculate the general diversity index.
 
     .. math::
@@ -27,6 +28,8 @@ def general(groups, q):
     :param list groups: a list of integers representing populations of groups
     :param float q: weight value
     """
+    if q == 1:
+        return exp(shannon(groups))
     groups = normalize(groups)
     return sum([g ** q for g in groups]) ** (1.0 / (1 - q))
 
@@ -84,7 +87,7 @@ def laakso_taagepera(groups):
     return 1.0 / sum([g ** 2 for g in groups])
 
 
-def renyi(groups, q=1):
+def renyi(groups, q=0):
     r"""Calculate the Renyi entropy.
 
     .. math::
@@ -95,6 +98,8 @@ def renyi(groups, q=1):
     :param float q: weight value
 
     """
+    if q == 1:
+        return shannon(groups)
     groups = normalize(groups)
     return 1.0 / (1 - q) * log(sum([g ** q for g in groups]))
 

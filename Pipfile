@@ -15,3 +15,5 @@ sphinx-rtd-theme = "*"
 [dev-packages]
 
 ptpython = "*"
+pytest = "*"
+pytest-cov = "*"
