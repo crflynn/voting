@@ -1,6 +1,11 @@
 Release History
 ---------------
 
+0.1.2 (2019-07-11)
+~~~~~~~~~~~~~~~~~~
+
+* Bugfix Dhondt/Jefferson apportionment method
+
 0.1.1 (2018-01-08)
 ~~~~~~~~~~~~~~~~~~
 
