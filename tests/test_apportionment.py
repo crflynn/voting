@@ -1,6 +1,4 @@
 """Apportionment method tests."""
-# flake8: noqa
-import pytest
 
 
 def test_apportionment_sum(apportionment_method, votes, seats):

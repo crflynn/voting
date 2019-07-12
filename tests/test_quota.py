@@ -1,6 +1,4 @@
 """Quota tests."""
-# flake8: noqa
-import pytest
 
 
 def test_quota_method(quota_method, seats):
