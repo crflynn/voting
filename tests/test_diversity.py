@@ -1,7 +1,4 @@
 """Diversity tests."""
-# flake8: noqa
-import pytest
-
 from voting.diversity import general
 from voting.diversity import renyi
 

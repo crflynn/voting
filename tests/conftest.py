@@ -1,5 +1,4 @@
 """Fixtures."""
-# flake8: noqa
 import pytest
 
 from voting.apportionment import adams

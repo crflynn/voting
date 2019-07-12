@@ -64,7 +64,7 @@ Package structure
 
   * proportion
 
-    * adjusted
+    * adjusted_loosemore_hanby
     * dhondt
     * gallagher
     * grofman

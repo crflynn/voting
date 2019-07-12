@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# flake8: noqa
-#
 # voting documentation build configuration file, created by
 # sphinx-quickstart on Sat Jan  6 19:27:38 2018.
 #

@@ -1,5 +1,4 @@
 """Proportion tests."""
-# flake8: noqa
 import pytest
 
 from voting.proportion import grofman
