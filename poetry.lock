@@ -659,8 +659,8 @@ python-versions = ">=2.7"
 version = "0.5.2"
 
 [metadata]
-content-hash = "f4eeb8cbd6e3054da15700274d433cb9e7afed74777e769494fcd73325ade6b7"
-python-versions = "~2.7 || ^3.4"
+content-hash = "43bcb3e4266d96053285aaf38f086f5bb61d5dd3122407b33d81b46ff1abee4f"
+python-versions = "~2.7 || ^3.5"
 
 [metadata.hashes]
 alabaster = ["446438bdcca0e05bd45ea2de1668c1d9b032e1a9154c2c259092d77031ddd359", "a661d72d58e6ea8a57f7a86e37d86716863ee5e92788398526d58b26a4e4dc02"]
