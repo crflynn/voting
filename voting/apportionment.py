@@ -120,18 +120,12 @@ def jefferson(votes, seats):
     :param list votes: a list of vote counts
     :param int seats: the number of seats to apportion
     """
-    divisor = 1.0 * sum(votes) / seats
-    decs, lower = zip(*[modf(1.0 * v / divisor) for v in votes])
-    lower = [int(l) for l in lower]
-    unallocated = int(seats - sum(lower))
-    if unallocated > 0:
-        # divisor diffs that would add another seat to each group
-        diffs = [1.0 * vote / ceil(i + dec) for i, dec, vote in zip(lower, decs, votes)]
-        # argsort
-        divs = [i[0] for i in sorted(enumerate(diffs), key=itemgetter(1))][::-1]
-        for k in range(unallocated):
-            lower[divs[k]] += 1
-    return lower
+    allocated = [0] * len(votes)
+    while sum(allocated) < seats:
+        quotients = [1.0 * vote / (allocated[idx] + 1) for idx, vote in enumerate(votes)]
+        idx_max = quotients.index(max(quotients))
+        allocated[idx_max] += 1
+    return allocated
 
 
 def sainte_lague(votes, seats):
