@@ -36,51 +36,74 @@ from voting.quota import hagenbach_bischoff as hb  # dupe of apportionment
 from voting.quota import hare
 from voting.quota import imperiali
 
+
 @pytest.fixture(params=[[2560, 3315, 995, 5012]])
 def votes(request):
     return request.param
+
 
 @pytest.fixture(params=[20])
 def seats(request):
     return request.param
 
+
 @pytest.fixture(params=list(range(4, 50)))
 def seats_val(request):
     return request.param
+
 
 @pytest.fixture(params=[[5, 6, 7, 8]])
 def seats_list(request):
     return request.param
 
-@pytest.fixture(params=[adams, dhondt, hagenbach_bischoff, hamilton,
-    huntington_hill, jefferson, sainte_lague, vinton, webster
-])
+
+@pytest.fixture(
+    params=[adams, dhondt, hagenbach_bischoff, hamilton, huntington_hill, jefferson, sainte_lague, vinton, webster]
+)
 def apportionment_method(request):
     return request.param
 
-@pytest.fixture(params=[droop, hb, hare, imperiali])
-def quota_method(request):
-    return request.param
 
 @pytest.fixture(params=[droop, hb, hare, imperiali])
 def quota_method(request):
     return request.param
 
-@pytest.fixture(params=[adjusted_loosemore_hanby, dh, gallagher, grofman,
-    least_square, lijphart, loosemore_hanby, rae, regression, rose, sl
-])
+
+@pytest.fixture(params=[droop, hb, hare, imperiali])
+def quota_method(request):
+    return request.param
+
+
+@pytest.fixture(
+    params=[
+        adjusted_loosemore_hanby,
+        dh,
+        gallagher,
+        grofman,
+        least_square,
+        lijphart,
+        loosemore_hanby,
+        rae,
+        regression,
+        rose,
+        sl,
+    ]
+)
 def proportion_method(request):
     return request.param
 
-@pytest.fixture(params=['seats', 'votes', 'something_else'])
+
+@pytest.fixture(params=["seats", "votes", "something_else"])
 def parties(request):
     return request.param
 
-@pytest.fixture(params=[berger_parker, general, gini_simpson, golosov,
-    inverse_simpson, laakso_taagepera, renyi, shannon, simpson
-])
+
+@pytest.fixture(
+    params=[berger_parker, general, gini_simpson, golosov, inverse_simpson, laakso_taagepera, renyi, shannon, simpson]
+)
 def diversity_method(request):
     return request.param
+
 
 @pytest.fixture(params=[0, 0.5, 1, 2])
 def q(request):
