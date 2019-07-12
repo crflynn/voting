@@ -4,7 +4,7 @@ from math import sqrt
 from voting.util import normalize
 
 
-def adjusted_loosemore_hanby(votes, seats, parties='votes'):
+def adjusted_loosemore_hanby(votes, seats, parties="votes"):
     r"""Calculate the adjusted Loosemore-Hanby index of disproportionality.
 
     .. math::
@@ -54,7 +54,7 @@ def gallagher(votes, seats):
     return sqrt(1.0 / 2) * least_square(votes, seats)
 
 
-def grofman(votes, seats, parties='votes'):
+def grofman(votes, seats, parties="votes"):
     r"""Calculate the Grofman index of disproportionality.
 
     .. math::
@@ -71,9 +71,9 @@ def grofman(votes, seats, parties='votes'):
     """
     votes = normalize(votes)
     seats = normalize(seats)
-    if parties == 'votes':
+    if parties == "votes":
         n = sum([v ** 2 for v in votes])
-    elif parties == 'seats':
+    elif parties == "seats":
         n = sum([s ** 2 for s in seats])
     else:
         raise ValueError("Parties argument must be either votes or seats.")

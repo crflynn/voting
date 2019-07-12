@@ -18,8 +18,7 @@ def adams(votes, seats):
     surplus = int(sum(upper) - seats)
     if surplus > 0:
         # divisor diffs that would remove another seat to each group
-        diffs = [1.0 * vote / max(floor(i + dec), 1)
-                 for i, dec, vote in zip(lower, decs, votes)]
+        diffs = [1.0 * vote / max(floor(i + dec), 1) for i, dec, vote in zip(lower, decs, votes)]
         # argsort low to high
         divs = [i[0] for i in sorted(enumerate(diffs), key=itemgetter(1))]
         for k in range(surplus):
@@ -63,8 +62,7 @@ def hamilton(votes, seats):
     unallocated = int(seats - sum(lower))
     if unallocated > 0:
         # argsort high to low
-        leftovers = \
-            [i[0] for i in sorted(enumerate(decs), key=itemgetter(1))][::-1]
+        leftovers = [i[0] for i in sorted(enumerate(decs), key=itemgetter(1))][::-1]
         for k in range(unallocated):
             lower[leftovers[k]] += 1
     return lower
@@ -84,33 +82,29 @@ def huntington_hill(votes, seats):
     decs, lower = zip(*[modf(1.0 * v / divisor) for v in votes])
     quotients = [d + l for d, l in zip(decs, lower)]
     geo_means = [sqrt(ceil(q) * floor(q)) for q in quotients]
-    assigned = [ceil(q) if q >= g else floor(q)
-                for q, g in zip(quotients, geo_means)]
+    assigned = [ceil(q) if q >= g else floor(q) for q, g in zip(quotients, geo_means)]
     unallocated = int(seats - sum(assigned))
     if unallocated > 0:
         # divisors that would add another seat to each group
         geo_means_next = [sqrt(ceil(q + 1) * floor(q + 1)) for q in quotients]
-        diffs = [1.0 * vote / max(gn, 1)
-                 if q >= g
-                 else 1.0 * vote / max(g, 1)
-                 for vote, q, g, gn
-                 in zip(votes, quotients, geo_means, geo_means_next)]
+        diffs = [
+            1.0 * vote / max(gn, 1) if q >= g else 1.0 * vote / max(g, 1)
+            for vote, q, g, gn in zip(votes, quotients, geo_means, geo_means_next)
+        ]
         # argsort
-        divs = [i[0] for i in sorted(enumerate(diffs),
-                                     key=itemgetter(1))][::-1]
+        divs = [i[0] for i in sorted(enumerate(diffs), key=itemgetter(1))][::-1]
         for k in range(unallocated):
             assigned[divs[k]] += 1
     elif unallocated < 0:
         unallocated = abs(unallocated)
         # divisors that would subtract a seat from each group
         geo_means_next = [sqrt(ceil(q - 1) * floor(q - 1)) for q in quotients]
-        diffs = [1.0 * vote / max(gn, 1)
-                 if q < g
-                 else 1.0 * vote / max(g, 1)
-                 for vote, q, g, gn
-                 in zip(votes, quotients, geo_means, geo_means_next)]
+        diffs = [
+            1.0 * vote / max(gn, 1) if q < g else 1.0 * vote / max(g, 1)
+            for vote, q, g, gn in zip(votes, quotients, geo_means, geo_means_next)
+        ]
         # sort fix to prevent allocations to be zero to any one group
-        diffs = [float('inf') if d < divisor else d for d in diffs]
+        diffs = [float("inf") if d < divisor else d for d in diffs]
         # argsort
         divs = [i[0] for i in sorted(enumerate(diffs), key=itemgetter(1))]
         for k in range(unallocated):
@@ -132,11 +126,9 @@ def jefferson(votes, seats):
     unallocated = int(seats - sum(lower))
     if unallocated > 0:
         # divisor diffs that would add another seat to each group
-        diffs = [1.0 * vote / ceil(i + dec)
-                 for i, dec, vote in zip(lower, decs, votes)]
+        diffs = [1.0 * vote / ceil(i + dec) for i, dec, vote in zip(lower, decs, votes)]
         # argsort
-        divs = [i[0] for i in sorted(enumerate(diffs),
-                                     key=itemgetter(1))][::-1]
+        divs = [i[0] for i in sorted(enumerate(diffs), key=itemgetter(1))][::-1]
         for k in range(unallocated):
             lower[divs[k]] += 1
     return lower
@@ -179,20 +171,19 @@ def webster(votes, seats):
     unallocated = int(seats - sum(assigned))
     if unallocated > 0:
         # divisors that would add another seat to each group
-        diffs = [1.0 * vote / (i + 1.5)
-                 if dec >= 0.5 else 1.0 * vote / (i + 0.5)
-                 for i, dec, vote in zip(lower, decs, votes)]
+        diffs = [
+            1.0 * vote / (i + 1.5) if dec >= 0.5 else 1.0 * vote / (i + 0.5) for i, dec, vote in zip(lower, decs, votes)
+        ]
         # argsort
-        divs = [i[0] for i in sorted(enumerate(diffs),
-                                     key=itemgetter(1))][::-1]
+        divs = [i[0] for i in sorted(enumerate(diffs), key=itemgetter(1))][::-1]
         for k in range(unallocated):
             assigned[divs[k]] += 1
     elif unallocated < 0:
         unallocated = abs(unallocated)
         # divisors that would subtract a seat from each group
-        diffs = [1.0 * vote / (i + 0.5)
-                 if dec >= 0.5 else 1.0 * vote / (i - 0.5)
-                 for i, dec, vote in zip(lower, decs, votes)]
+        diffs = [
+            1.0 * vote / (i + 0.5) if dec >= 0.5 else 1.0 * vote / (i - 0.5) for i, dec, vote in zip(lower, decs, votes)
+        ]
         # argsort
         divs = [i[0] for i in sorted(enumerate(diffs), key=itemgetter(1))]
         for k in range(unallocated):
