@@ -56,8 +56,8 @@ python = "~2.7 || ^3.4"
 
 [tool.poetry.dev-dependencies]
 sphinx = {version = "^2.1", python = "^3.7"}
-sphinx-autobuild = "^0.7.1"
-sphinx-rtd-theme = "^0.4.3"
+sphinx-autobuild = {version = "^0.7.1", python = "^3.7"}
+sphinx-rtd-theme = {version = "^0.4.3", python = "^3.7"}
 pytest = "^4.6"
 pytest-cov = "^2.7"
 twine = "^1.13"
