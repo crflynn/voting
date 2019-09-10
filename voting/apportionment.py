@@ -181,12 +181,11 @@ def webster(votes, seats):
         # argsort
         divs = [i[0] for i in sorted(enumerate(diffs), key=itemgetter(1))]
         # deallocate seats without bringing seat allocation below zero
-        deallocated = 0
         div_idx = 0
-        while deallocated < overallocated:
+        while overallocated > 0:
             if assigned[divs[div_idx]] > 0:
                 assigned[divs[div_idx]] -= 1
-                deallocated += 1
+                overallocated -= 1
             else:
                 div_idx += 1
     return assigned
