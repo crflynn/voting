@@ -22,7 +22,7 @@ exclude = '''
 
 [tool.poetry]
 name = "voting"
-version = "0.1.2"
+version = "0.1.3"
 description = "Voting and election related functions."
 authors = ["Christopher Flynn <crf204@gmail.com>"]
 readme = "README.rst"

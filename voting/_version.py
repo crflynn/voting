@@ -2,7 +2,7 @@
 __title__ = "voting"
 __description__ = "Voting and election related functions."
 __url__ = "https://github.com/crflynn/voting"
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 __author__ = "Christopher Flynn"
 __author_email__ = "crf204@gmail.com"
 __license__ = "MIT"

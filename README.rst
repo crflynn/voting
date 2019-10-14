@@ -26,7 +26,7 @@ methods.
 Installation
 ------------
 
-The ``voting`` package works in Python 2.7, 3.4, 3.5, 3.6. It is available on
+The ``voting`` package works in Python 2.7, 3.5, 3.6 and 3.7. It is available on
 pypi and can be installed using pip.
 
 .. code-block:: shell

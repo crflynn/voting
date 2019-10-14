@@ -1,13 +1,13 @@
 """Module level accessible objects."""
-from voting.__version__ import __version__
-from voting.__version__ import __description__
-from voting.__version__ import __url__
-from voting.__version__ import __title__
-from voting.__version__ import __author__
-from voting.__version__ import __author_email__
-from voting.__version__ import __license__
-from voting.__version__ import __copyright__
-from voting.__version__ import __docs_copyright__
+from voting._version import __version__
+from voting._version import __description__
+from voting._version import __url__
+from voting._version import __title__
+from voting._version import __author__
+from voting._version import __author_email__
+from voting._version import __license__
+from voting._version import __copyright__
+from voting._version import __docs_copyright__
 
 __all__ = (
     __version__,
