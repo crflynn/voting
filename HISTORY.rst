@@ -1,6 +1,13 @@
 Release History
 ---------------
 
+0.1.3 (2019-10-13)
+~~~~~~~~~~~~~~~~~~
+
+* Fix for Adams method
+* Fix for Webster method
+* Fix _version.py for conflicts
+
 0.1.2 (2019-07-11)
 ~~~~~~~~~~~~~~~~~~
 
