@@ -16,13 +16,23 @@ def adams(votes, seats):
     decs, lower = zip(*[modf(1.0 * v / divisor) for v in votes])
     upper = [ceil(1.0 * v / divisor) for v in votes]
     surplus = int(sum(upper) - seats)
-    if surplus > 0:
-        # divisor diffs that would remove another seat to each group
-        diffs = [1.0 * vote / max(floor(i + dec), 1) for i, dec, vote in zip(lower, decs, votes)]
+    while surplus > 0:
+        # divisors that would remove another seat to each group
+        divisors = [1.0 * vote / max(floor(allocated + dec), 1) for allocated, dec, vote in zip(lower, decs, votes)]
         # argsort low to high
-        divs = [i[0] for i in sorted(enumerate(diffs), key=itemgetter(1))]
-        for k in range(surplus):
-            upper[divs[k]] -= 1
+        divs = [i[0] for i in sorted(enumerate(divisors), key=itemgetter(1))]
+        for k in divs:
+            if divisors[k] > divisor:
+                idx = k
+                break
+        # if they're all zero, subtract from the largest group
+        else:
+            largest = [i[0] for i in sorted(enumerate(votes), key=itemgetter(1))]
+            idx = largest[-1]
+        divisor = divisors[idx]
+        decs, lower = zip(*[modf(1.0 * v / divisor) for v in votes])
+        upper = [ceil(1.0 * v / divisor) for v in votes]
+        surplus = int(sum(upper) - seats)
     return upper
 
 
