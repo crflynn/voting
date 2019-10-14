@@ -1,8 +1,5 @@
 """Apportionment method tests."""
-<<<<<<< HEAD
-=======
 from voting.apportionment import adams
->>>>>>> master
 from voting.apportionment import webster
 
 
