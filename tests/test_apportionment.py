@@ -18,7 +18,3 @@ def test_adams():
     seats = 240
     result = [37, 26, 20, 18, 13, 12, 12, 12, 9, 9, 8, 8, 7, 7, 6, 6, 6, 6, 4, 4, 3, 3, 2, 2]
     assert adams(votes, seats) == result
-
-
-def test_webster():
-    assert all([a >= 0 for a in webster([2057, 2496, 2059, 181], 15)])
