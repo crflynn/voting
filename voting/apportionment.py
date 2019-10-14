@@ -183,13 +183,19 @@ def webster(votes, seats):
         for k in range(unallocated):
             assigned[divs[k]] += 1
     elif unallocated < 0:
-        unallocated = abs(unallocated)
+        overallocated = abs(unallocated)
         # divisors that would subtract a seat from each group
         diffs = [
             1.0 * vote / (i + 0.5) if dec >= 0.5 else 1.0 * vote / (i - 0.5) for i, dec, vote in zip(lower, decs, votes)
         ]
         # argsort
         divs = [i[0] for i in sorted(enumerate(diffs), key=itemgetter(1))]
-        for k in range(unallocated):
-            assigned[divs[k]] -= 1
+        # deallocate seats without bringing seat allocation below zero
+        div_idx = 0
+        while overallocated > 0:
+            if assigned[divs[div_idx]] > 0:
+                assigned[divs[div_idx]] -= 1
+                overallocated -= 1
+            else:
+                div_idx += 1
     return assigned
